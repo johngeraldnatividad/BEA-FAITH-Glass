@@ -29,7 +29,7 @@ export default function Header() {
     <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
       <div className="container header-inner">
         <a href="#top" className="brand">
-<img className="brand-mark" src="/images/bea-faith-logo.jpg" alt="Bea Faith logo" />
+          <img className="brand-mark" src={`${import.meta.env.BASE_URL}bea-faith-logo.jpg`} alt="Bea Faith logo" />
         </a>
         <button
           className="nav-toggle"

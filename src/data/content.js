@@ -1,22 +1,20 @@
-const projectImageFiles = import.meta.glob('/images/*/*.{jpg,jpeg,png,webp}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-})
+const numberedFiles = (prefix, count) =>
+  Array.from({ length: count }, (_, index) => `${prefix}${index + 1}.jpg`)
 
-const sortedProjectFiles = Object.entries(projectImageFiles)
-  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+const projectFolders = [
+  { folder: 'cabinet', files: numberedFiles('cabinet ', 17) },
+  { folder: 'canopy', files: numberedFiles('canopy', 7) },
+  {
+    folder: 'screendoor',
+    files: ['1.jpg', ...Array.from({ length: 20 }, (_, index) => `1 (${index + 2}).jpg`)],
+  },
+  { folder: 'slidingdoor', files: numberedFiles('slidingdoor', 5) },
+  { folder: 'slidingwindow', files: numberedFiles('slidingwindow', 14) },
+]
 
 let nextProjectIndex = 0
 
-export const projectGroups = Object.entries(
-  sortedProjectFiles.reduce((groups, [path, image]) => {
-    const folder = path.split('/')[2]
-    groups[folder] ??= []
-    groups[folder].push(image)
-    return groups
-  }, {}),
-).map(([folder, images]) => {
+export const projectGroups = projectFolders.map(({ folder, files }) => {
   const title = ({
     cabinet: 'Cabinet',
     canopy: 'Canopy',
@@ -28,8 +26,8 @@ export const projectGroups = Object.entries(
   return {
     folder,
     title,
-    projects: images.map(image => ({
-      image,
+    projects: files.map(file => ({
+      image: `${import.meta.env.BASE_URL}${folder}/${encodeURIComponent(file)}`,
       label: title,
       alt: `${title} work by Bea Faith`,
       index: nextProjectIndex++,
