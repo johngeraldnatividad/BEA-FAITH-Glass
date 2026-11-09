@@ -77,7 +77,7 @@ export const services = [
   { id: 'aluminum', title: 'Aluminum', cls: 'alum', photo: slidingDoorPhotos[2],
     text: 'Sliding and swing windows, doors, cabinets, canopies, facades and frames, light yet durable.' },
   { id: 'steel', title: 'Steel works', cls: 'steel', photo: canopyPhotos[3],
-    text: 'Gates, grills, fences, stairs, trusses, roofing frames and strctural steel, welded and finished.' },
+    text: 'Gates, grills, fences, stairs, trusses, roofing frames and structural steel, welded and finished.' },
 ]
 
 export const steps = [
